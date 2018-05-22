@@ -9,10 +9,13 @@ var userSchema = mongoose.Schema({
 var User = mongoose.model('User', userSchema);
 
 var walletSchema = mongoose.Schema({
-  address: String,
-  owner: String,
+  createdAt: String,
   balance: Number,
-  creationDate: String
+  hasSpendingPassword: Boolean,
+  name: String,
+  id: String,
+  spendingPasswordLastUpdate: Boolean,
+  backupPhrase: [String],
 });
 var Wallet =  mongoose.model('Wallet', walletSchema);
 
