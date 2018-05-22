@@ -86,6 +86,26 @@ router.post('/', (req, res, next) => {
     });
 });
 
+router.patch('/generateNewAddress/:wid', (req, res, next) => {
+  if (!req.params.wid) {
+    var err = new Error('wid required as url param');
+    err.status(400);
+    next(err);
+    return;
+  }
+  Wallet.findByIdAndUpdate(req.params.wid, { address: generateHash({ length: 34 }) })
+    .then( result => {
+      return Wallet.findById(req.params.wid);
+    })
+    .then( result => {
+      res.status(200).send('New Address: ' + result.address);
+    })
+    .catch( err => {
+      handleError(next, err);
+      return;
+    });
+});
+
 router.patch('/send/:wid', (req, res, next) => {
 /*
   {
