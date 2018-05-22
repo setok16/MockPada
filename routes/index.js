@@ -18,7 +18,7 @@ router.get('/', function(req, res, next) {
     '/wallets': {
       'GET': [
         '/wallets/',
-        '/wallets/wid',
+        '/wallets/:wid',
       ],
       'POST': [
         '/wallets',
